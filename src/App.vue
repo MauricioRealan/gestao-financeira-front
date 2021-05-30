@@ -1,28 +1,55 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <div id="nav">
+      <router-link to="/"
+        ><i class="fa fa-money-check-alt"></i>Movimentações</router-link
+      >
+      <router-link to="/novo-lancamento"
+        ><i class="fa fa-plus-square"></i>Novo Lançamento</router-link
+      >
+      <router-link to="/balanco"
+        ><i class="fa fa-balance-scale-left"></i>Balanço Financeiro</router-link
+      >
+      <label style="float: right"
+        > mauricio.arrieira <i class="fa fa-user"></i>
+        </label
+      >
+    </div>
+    <router-view />
   </div>
 </template>
 
-<script>
-import HelloWorld from './components/HelloWorld.vue'
-
-export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
-</script>
-
-<style>
+<style lang="scss">
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  background-color: white;
+}
+
+#nav {
+  padding: 20px 0px;
+  background-color: #2c3e50;
+  color: white;
+  border-bottom: 3px solid gray;
+
+  a {
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+    padding-left: 30px;
+    padding-right: 30px;
+
+    &.router-link-exact-active {
+      color: #2c3e50;
+      background-color: white;
+      padding: 40px;
+    }
+  }
+}
+
+i {
+  margin-right: 10px;
+  font-size: 30px;
 }
 </style>
