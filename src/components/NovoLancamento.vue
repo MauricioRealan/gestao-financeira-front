@@ -5,40 +5,61 @@
         <div style="display: inline-grid">
           <label>Categoria</label>
           <div style="display: inline-flex; margin-top: 10px">
-            <button><i class="fa fa-folder-minus"></i>Despesa</button>
-            <button><i class="fa fa-folder-plus"></i>Receita</button>
+            <button
+              v-on:click="onCategoriaChange('Despesa')"
+              v-bind:class="{ active: categoria === 'Despesa' }"
+            >
+              <i class="fa fa-folder-minus"></i>Despesa
+            </button>
+            <button
+              v-on:click="onCategoriaChange('Receita')"
+              v-bind:class="{ active: categoria === 'Receita' }"
+            >
+              <i class="fa fa-folder-plus"></i>Receita
+            </button>
           </div>
         </div>
         <div class="base-top">
           <label>Descrição</label>
-          <textarea></textarea>
+          <textarea v-model="movimento"></textarea>
         </div>
         <div class="base-top" style="display: inline-grid">
           <label>Valor</label>
-          <money v-model="price" v-bind="money"></money>
+          <money v-model="valor" v-bind="money"></money>
         </div>
       </div>
     </div>
-    <button class="btn-save"><i class="fa fa-check-circle"></i>Salvar</button>
-    <v-tooltip right>
-      <template v-slot:activator="{ on, attrs }">
-        <button class="btn-save" v-bind="attrs" v-on="on">
-          <i class="fa fa-undo"></i>Desfazer
-        </button>
+    <button
+      :disabled="shouldDisableSave()"
+      v-bind:class="[{ btnDisable: shouldDisableSave() }, 'btnSave']"
+      v-on:click="saveNewLancamento()"
+    >
+      <i class="fa fa-check-circle"></i>Salvar
+    </button>
+    <v-snackbar v-model="snackbar">
+      Lançamento realizado com sucesso!
+
+      <template v-slot:action="{ attrs }">
+        <v-btn color="blue" text v-bind="attrs" @click="snackbar = false">
+          X
+        </v-btn>
       </template>
-      <span>Top tooltip</span>
-    </v-tooltip>
+    </v-snackbar>
+    <button class="btnSave"><i class="fa fa-undo"></i>Desfazer</button>
   </div>
 </template>
 
 <script>
 import { Money } from "v-money";
+const axios = require("axios");
 
 export default {
   name: "NovoLancamento",
   data() {
     return {
-      price: 0,
+      categoria: null,
+      valor: 0,
+      movimento: "",
       money: {
         decimal: ",",
         thousands: ".",
@@ -47,9 +68,42 @@ export default {
         precision: 2,
         masked: false,
       },
+      snackbar: false,
     };
   },
   components: { Money },
+  methods: {
+    onCategoriaChange(categoria) {
+      this.categoria = categoria;
+    },
+    shouldDisableSave() {
+      return (
+        this.categoria === null || this.valor === 0 || this.movimento === ""
+      );
+    },
+    saveNewLancamento() {
+      axios
+        .post("http://localhost:8081/salvar", {
+          id: null,
+          categoria: this.categoria,
+          data: this.buildFormattedDate(),
+          valor: this.valor,
+          movimento: this.movimento,
+        })
+        .then((response) => {
+          if (response.data !== null) {
+            this.snackbar = true;
+            setTimeout(() => this.$router.push("/"), 3000);
+          }
+        });
+    },
+    buildFormattedDate() {
+      let date = new Date().toISOString();
+      date = date.split('T')[0].split('-')
+      const formattedDate = date[2] + '/' + date[1] + '/' + date[0];
+      return formattedDate;
+    }
+  },
 };
 </script>
 
@@ -85,17 +139,28 @@ button {
 }
 
 button:hover {
-  background-color: white; /* Green */
+  background-color: white;
   color: #2c3e50;
   border: 1px solid #2c3e50;
 }
 
-.btn-save {
+.active {
+  background-color: #2c3e50;
+  color: white;
+  border: 1px solid grey;
+}
+
+.btnDisable {
+  background-color: silver !important;
+  color: white;
+}
+
+.btnSave {
   margin-top: 20px;
   background-color: #2c3e50;
 }
 
-.btn-save:hover {
+.btnSave:hover {
   background-color: #2c3e50;
   color: white;
   border: 1px solid gray;
