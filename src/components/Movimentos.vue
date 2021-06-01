@@ -36,11 +36,11 @@ export default {
         {
           text: "Descrição da movimentação",
           value: "movimento",
-          align: "center",
+          class: "headers",
         },
-        { text: "Categoria", value: "categoria" },
-        { text: "Valor (R$)", value: "valor" },
-        { text: "Data", value: "data", align: "center" },
+        { text: "Categoria", value: "categoria", class: "headers" },
+        { text: "Valor (R$)", value: "valor", class: "headers" },
+        { text: "Data", value: "data", class: "headers" },
       ],
       movimentos: [],
     };
@@ -55,7 +55,7 @@ export default {
     handleClick(value) {
       console.log("value: ", value);
     },
-    formatValoresAndCategoria() {
+    formatValores() {
       this.movimentos.forEach((movimento) => {
         movimento.valor = movimento.valor.toString().replace(".", ",");
       });
@@ -64,7 +64,17 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
+.headers {
+  background-color: #2c3e50;
+  color: white !important;
+  font-weight: bold;
+  font-size: 16px !important;
+  text-align: initial;
+}
+i {
+  color: white !important;
+}
 .container {
   padding: 20px;
 }

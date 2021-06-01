@@ -12,6 +12,7 @@
     "core-js": "~3.12.1",
     "v-money": "^0.8.1",
     "vue": "~2.6.12",
+    "vue-currency-filter": "^5.2.0",
     "vue-money-mask": "^0.8.1",
     "vue-router": "^3.5.1",
     "vuetify": "~2.5.0"
