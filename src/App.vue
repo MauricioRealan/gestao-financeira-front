@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/"
+      <router-link to="/movimentacoes"
         ><i class="fa fa-money-check-alt"></i>Movimentações</router-link
       >
       <router-link to="/novo-lancamento"
@@ -11,13 +11,36 @@
         ><i class="fa fa-balance-scale-left"></i>Balanço Financeiro</router-link
       >
       <label style="float: right"
-        > mauricio.arrieira <i class="fa fa-user"></i>
+        > {{user}} <i class="fa fa-user"></i>
         </label
       >
     </div>
     <router-view />
   </div>
 </template>
+
+
+<script>
+
+export default {
+  data() {
+    return {
+      user: ""
+    }
+  },
+  components: {
+  },
+  methods: {
+  },
+  mounted() {
+   this.user = sessionStorage.getItem("user");
+  }
+}
+</script>
+
+<style>
+
+</style>
 
 <style lang="scss">
 #app {

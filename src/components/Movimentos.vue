@@ -151,13 +151,13 @@ i {
   font-size: 18px;
 }
 .container {
-  padding: 20px;
+  padding: 20px !important;
   padding-top: 30px !important;
 }
 .box {
-  padding: 10px;
-  border: 2px solid gray;
-  border-radius: 2px;
+  padding: 10px !important;
+  border: 2px solid gray !important;
+  border-radius: 2px !important;
 }
 .custom-table {
   font-family: Arial, Helvetica, sans-serif !important;
@@ -179,12 +179,12 @@ textarea {
   margin-top: 10px;
 }
 input {
-  border-bottom: 1px solid #2c3e50;
-  margin-top: 10px;
-  width: 100%;
+  border-bottom: 1px solid #2c3e50 !important;
+  margin-top: 10px !important;
+  width: 100% !important;
 }
 input:focus {
-  outline: none;
+  outline: none !important;
 }
 button {
   background-color: gray;

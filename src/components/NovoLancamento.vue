@@ -93,7 +93,7 @@ export default {
         .then((response) => {
           if (response.data !== null) {
             this.snackbar = true;
-            setTimeout(() => this.$router.push("/"), 3000);
+            setTimeout(() => this.$router.push("/movimentacoes"), 3000);
           }
         });
     },
