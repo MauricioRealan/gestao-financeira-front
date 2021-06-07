@@ -14,12 +14,7 @@ const routes = [
     name: 'Movimentacoes',
     component: () => import('../components/Movimentos.vue'),
     beforeEnter: (to, from, next) => {
-      if (sessionStorage.getItem("user") !== null) {
-        next()
-      } else {
-        console.log('no else')
-        router.push("/")
-      }
+      checkUser(next)
     }
   },
   {
@@ -27,12 +22,7 @@ const routes = [
     name: 'NovoLancamento',
     component: () => import('../components/NovoLancamento.vue'),
     beforeEnter: (to, from, next) => {
-      if (sessionStorage.getItem("user") !== null) {
-        next()
-      } else {
-        console.log('no else')
-        router.push("/")
-      }
+      checkUser(next)
     }
   },
   {
@@ -40,12 +30,7 @@ const routes = [
     name: 'Balanco',
     component: () => import('../components/Balanco.vue'),
     beforeEnter: (to, from, next) => {
-      if (sessionStorage.getItem("user") !== null) {
-        next()
-      } else {
-        console.log('no else')
-        router.push("/")
-      }
+      checkUser(next)
     }
   }
 ]
@@ -55,3 +40,12 @@ const router = new VueRouter({
 })
 
 export default router
+
+function checkUser(next) {
+  if (sessionStorage.getItem("user") !== null) {
+    next()
+  } else {
+    router.push("/")
+  }
+}
+

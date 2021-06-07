@@ -30,7 +30,7 @@
             <money v-model="movimento.valor" v-bind="money"></money>
           </v-col>
         </v-row>
-        <div style="margin-top: 15px">
+        <div class="base-top-fifteen ">
           <label>Descrição: </label>
           <textarea v-model="movimento.movimento"></textarea>
           <button class="btnSave" v-on:click="saveLancamento()">
@@ -89,6 +89,7 @@ export default {
     };
   },
   mounted() {
+    sessionStorage.removeItem("reload");
     axios.get("http://localhost:8081/buscar").then((response) => {
       this.movimentos = response.data;
       this.formatValores();
@@ -97,7 +98,6 @@ export default {
   components: { Money },
   methods: {
     handleClick(value) {
-      console.log("value: ", value);
       this.movimento = value;
       this.isEditing = true;
     },
@@ -146,30 +146,36 @@ export default {
   font-size: 16px !important;
   text-align: initial;
 }
+
 i {
-  color: white !important;
   font-size: 18px;
 }
+
 .container {
   padding: 20px !important;
   padding-top: 30px !important;
 }
+
 .box {
   padding: 10px !important;
   border: 2px solid gray !important;
   border-radius: 2px !important;
 }
+
 .custom-table {
   font-family: Arial, Helvetica, sans-serif !important;
   cursor: pointer !important;
 }
+
 .custom-table > td {
   text-align: end !important;
 }
+
 .custom-search-field {
   width: 30% !important;
   font-family: Arial, Helvetica, sans-serif !important;
 }
+
 textarea {
   border: 1px solid #2c3e50;
   border-radius: 2px;
@@ -178,14 +184,17 @@ textarea {
   resize: none;
   margin-top: 10px;
 }
+
 input {
   border-bottom: 1px solid #2c3e50 !important;
   margin-top: 10px !important;
   width: 100% !important;
 }
+
 input:focus {
   outline: none !important;
 }
+
 button {
   background-color: gray;
   color: white;
@@ -199,6 +208,7 @@ button:hover {
   color: #2c3e50;
   border: 1px solid #2c3e50;
 }
+
 .btnSave {
   margin-top: 20px;
   background-color: #2c3e50;
@@ -208,5 +218,9 @@ button:hover {
   background-color: #2c3e50;
   color: white;
   border: 1px solid gray;
+}
+
+.base-top-fifteen {
+  margin-top: 15px;
 }
 </style>

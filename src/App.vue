@@ -10,37 +10,37 @@
       <router-link to="/balanco"
         ><i class="fa fa-balance-scale-left"></i>Balanço Financeiro</router-link
       >
-      <label style="float: right"
-        > {{user}} <i class="fa fa-user"></i>
-        </label
-      >
+      <label style="float: right">
+        <i class="fa fa-user"></i>{{ user }}
+        <i class="fa fa-sign-out-alt" v-on:click="logout()"></i>
+      </label>
     </div>
     <router-view />
   </div>
 </template>
 
-
 <script>
-
 export default {
   data() {
     return {
-      user: ""
-    }
+      user: "",
+    };
   },
-  components: {
-  },
+  components: {},
   methods: {
+    logout() {
+      sessionStorage.removeItem("user");
+      this.user = "";
+      this.$router.push("/");
+    },
   },
   mounted() {
-   this.user = sessionStorage.getItem("user");
-  }
-}
+    this.user = sessionStorage.getItem("user");
+  },
+};
 </script>
 
-<style>
-
-</style>
+<style></style>
 
 <style lang="scss">
 #app {
@@ -64,7 +64,7 @@ export default {
     padding-right: 30px;
 
     &.router-link-exact-active {
-      color: #2c3e50;
+      color: #2c3e50 !important;
       background-color: white;
       padding: 40px;
     }
@@ -72,7 +72,19 @@ export default {
 }
 
 i {
-  margin-right: 10px;
+  margin-right: 10px !important;
+}
+
+.fa-user,
+.fa-money-check-alt,
+.fa-plus-square,
+.fa-balance-scale-left {
   font-size: 30px;
+}
+
+.fa-sign-out-alt {
+  margin-left: 20px;
+  cursor: pointer;
+  font-size: 24px;
 }
 </style>

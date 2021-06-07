@@ -88,6 +88,10 @@ export default {
   },
   mounted() {
     this.getBalancoFinanceiro();
+    if (sessionStorage.getItem('reload') === null) {
+      sessionStorage.setItem('reload', 'true');
+      window.location.reload();
+    }
   },
   methods: {
     getBalancoFinanceiro() {
@@ -148,10 +152,12 @@ export default {
   color: green;
   font-size: 30px;
 }
+
 .fa-user-minus {
   color: red;
   font-size: 30px;
 }
+
 .fa-money-bill-wave {
   font-size: 40px;
   color: darkolivegreen;
@@ -161,6 +167,7 @@ export default {
   font-size: 60px;
   color: green;
 }
+
 .fa-frown {
   font-size: 60px;
   color: red;

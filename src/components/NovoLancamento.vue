@@ -1,10 +1,10 @@
 <template>
   <div class="container">
     <div class="box">
-      <div style="display: inline-grid; width: 100%">
-        <div style="display: inline-grid">
+      <div class="inline-grid full-width">
+        <div class="inline-grid">
           <label>Categoria</label>
-          <div style="display: inline-flex; margin-top: 10px">
+          <div class="inline-flex base-top-ten">
             <button
               v-on:click="onCategoriaChange('Despesa')"
               v-bind:class="{ active: categoria === 'Despesa' }"
@@ -19,11 +19,11 @@
             </button>
           </div>
         </div>
-        <div class="base-top">
+        <div class="base-top-thirty">
           <label>Descrição</label>
           <textarea v-model="movimento"></textarea>
         </div>
-        <div class="base-top" style="display: inline-grid">
+        <div class="base-top-thirty inline-grid">
           <label>Valor</label>
           <money v-model="valor" v-bind="money"></money>
         </div>
@@ -71,6 +71,9 @@ export default {
       snackbar: false,
     };
   },
+  mounted() {
+    sessionStorage.removeItem("reload");
+  },
   components: { Money },
   methods: {
     onCategoriaChange(categoria) {
@@ -99,10 +102,10 @@ export default {
     },
     buildFormattedDate() {
       let date = new Date().toISOString();
-      date = date.split('T')[0].split('-')
-      const formattedDate = date[2] + '/' + date[1] + '/' + date[0];
+      date = date.split("T")[0].split("-");
+      const formattedDate = date[2] + "/" + date[1] + "/" + date[0];
       return formattedDate;
-    }
+    },
   },
 };
 </script>
@@ -118,8 +121,12 @@ export default {
   border-radius: 2px;
 }
 
-.base-top {
+.base-top-thirty {
   margin-top: 30px;
+}
+
+.base-top-ten {
+  margin-top: 10px;
 }
 
 label {
@@ -180,7 +187,20 @@ input {
   margin-top: 10px;
   width: 20%;
 }
+
 input:focus {
   outline: none;
+}
+
+.inline-grid {
+  display: inline-grid;
+}
+
+.inline-flex {
+  display: inline-flex;
+}
+
+.full-width {
+  width: 100%;
 }
 </style>
