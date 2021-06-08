@@ -1,5 +1,14 @@
 # gestao-financeira
 
+## Projeto
+```
+App para gestão financeira pessoal. Contruído com Vue.js, utilizando as seguintes features e principios:
+- Axios para comunicação com o back-end;
+- Vuetify para componentes de interface;
+- VueRouter para navegação entre rotas;
+- Fontawesome como padrão para ícones.
+```
+
 ## Project setup
 ```
 npm install
